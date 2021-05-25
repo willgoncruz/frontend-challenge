@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
+import Search from './pages/Search';
 import reportWebVitals from './reportWebVitals';
 import {
   BrowserRouter as Router,
@@ -11,18 +12,27 @@ import {
 } from "react-router-dom";
 import Details from './pages/Details';
 
+import { createContext } from "react"
+import SearchStore from './stores/search';
+
+const SearchContext = createContext('SearchStore');
+
 ReactDOM.render(
   <React.StrictMode>
+    <SearchContext.Provider value={new SearchStore()}>
     <Router>
       <Switch>
         <Route path='/details'>
           <Details />
         </Route>
         <Route path='/'>
-          <App />
+          <SearchContext.Consumer>
+            {value => <Search store={value} /> }
+          </SearchContext.Consumer>
         </Route>
       </Switch>
     </Router>
+  </SearchContext.Provider>
   </React.StrictMode>,
   document.getElementById('root')
 );
