@@ -16,6 +16,7 @@ import { createContext } from "react"
 import SearchStore from './stores/search';
 
 const SearchContext = createContext('SearchStore');
+Search.contextType = SearchContext;
 
 ReactDOM.render(
   <React.StrictMode>
@@ -26,9 +27,7 @@ ReactDOM.render(
           <Details />
         </Route>
         <Route path='/'>
-          <SearchContext.Consumer>
-            {value => <Search store={value} /> }
-          </SearchContext.Consumer>
+          <Search />
         </Route>
       </Switch>
     </Router>

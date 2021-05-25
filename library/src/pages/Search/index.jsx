@@ -1,12 +1,20 @@
-import { observer } from 'mobx-react-lite';
+import { Component } from 'react';
+import { Observer } from 'mobx-react-lite';
 
-const SearchPage = observer((props) => {
-    props.store.search('harry');
-    return (
-        <div>
+import BookList from '../../components/BookList';
+import SearchBar from '../../components/SearchBar';
 
-        </div>
-    );
-});
-
-export default SearchPage;
+export default class SearchPage extends Component {
+    render() {
+        return (
+            <Observer>
+                {() =>
+                    <div>
+                        <SearchBar store={this.context} />
+                        <BookList books={this.context.books} />
+                    </div>
+                }
+            </Observer>
+        );
+    }
+}

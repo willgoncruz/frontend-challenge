@@ -6,7 +6,7 @@ import BookCover from '../BookCover';
 const Container = styled.div`
     display: inline-block;
     position: relative;
-    
+
     width: 100%;
     height: 282px;
 `

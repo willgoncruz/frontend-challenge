@@ -1,7 +1,7 @@
 import { Component } from 'react';
 import styled from 'styled-components';
 
-import Wallpaper from '../../components/Wallpaper'; 
+import Wallpaper from '../../components/Wallpaper';
 
 const InformationPanel = styled.div`
     margin: 0 20px;
