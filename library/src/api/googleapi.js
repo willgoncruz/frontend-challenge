@@ -1,6 +1,6 @@
 const axios = require('axios');
 
-const apiKey = 'AIzaSyDUDHDBK8kxJrJlGv2WgWR_uEsmCWEIALU';
+const apiKey = '';
 const baseURL = 'https://www.googleapis.com/books/v1';
 
 const instance = axios.create({
