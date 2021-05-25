@@ -1,5 +1,6 @@
 import { Component } from 'react';
 import styled from 'styled-components';
+import { Observer } from 'mobx-react-lite';
 
 import Wallpaper from '../../components/Wallpaper';
 
@@ -39,8 +40,10 @@ const Author = styled.div`
 
 const Description = styled.div`
     width: 100%;
-    height: 275px;
+    height: fit-content;
     margin-top: 10px;
+    margin-bottom: 10px;
+
 
     font-family: SF Pro Text;
     font-size: 14px;
@@ -50,24 +53,30 @@ const Description = styled.div`
     color: rgba(49, 49, 49, 0.6);
 `
 
-const imageURL = 'https://books.google.com/books/content/images/frontcover/buc0AAAAMAAJ?fife=w200-h300'
+const DetailsRenderer = ({ book }) => {
+    return (
+        <div>
+            <Wallpaper bookCoverImageSrc={book.cover} />
+            <InformationPanel>
+                <Title>{book.title}</Title>
+                <Author>{book.authors}</Author>
+                <Description dangerouslySetInnerHTML={{__html: book.description }} />
+            </InformationPanel>
+        </div>
+    );
+};
 
 export default class Details extends Component {
+    componentDidMount() {
+        const { id } = this.props.match.params;
+        this.context.getBookByID(id);
+    }
+
     render() {
         return (
-            <div>
-                <Wallpaper bookCoverImageSrc={imageURL} />
-                <InformationPanel>
-                    <Title> Hooked: How to Build Habid-Forming Products </Title>
-                    <Author>Nir Eyal</Author>
-                    <Description>
-                        How do successful companies create products people can't put down?
-                        Why do some products capture widespread attention while others flop?
-                        Why do some products capture widespread attention while others flop?
-                        Why do some products capture widespread attention while others flop?
-                    </Description>
-                </InformationPanel>
-            </div>
+            <Observer>
+                {() => <DetailsRenderer book={this.context.book} /> }
+            </Observer>
         );
     }
 }

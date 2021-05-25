@@ -14,3 +14,7 @@ const requestGoogleApi = (url) => {
 export const searchVolumes = (searchTerm) => {
     return requestGoogleApi(`/volumes?q=${searchTerm}`);
 }
+
+export const getVolumeByID = (id) => {
+    return requestGoogleApi(`/volumes/${id}?`);
+}

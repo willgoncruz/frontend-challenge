@@ -1,36 +1,35 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import App from './App';
 import Search from './pages/Search';
 import reportWebVitals from './reportWebVitals';
 import {
   BrowserRouter as Router,
   Switch,
-  Route,
-  Link
+  Route
 } from "react-router-dom";
 import Details from './pages/Details';
 
 import { createContext } from "react"
 import SearchStore from './stores/search';
+import DetailsStore from './stores/details';
 
 const SearchContext = createContext('SearchStore');
+const DetailsContext = createContext('DetailsStore');
 Search.contextType = SearchContext;
+Details.contextType = DetailsContext;
 
 ReactDOM.render(
   <React.StrictMode>
     <SearchContext.Provider value={new SearchStore()}>
+    <DetailsContext.Provider value={new DetailsStore()}>
     <Router>
       <Switch>
-        <Route path='/details'>
-          <Details />
-        </Route>
-        <Route path='/'>
-          <Search />
-        </Route>
+        <Route path='/details/:id' component={Details} />
+        <Route path='/' component={Search} />
       </Switch>
     </Router>
+  </DetailsContext.Provider>
   </SearchContext.Provider>
   </React.StrictMode>,
   document.getElementById('root')

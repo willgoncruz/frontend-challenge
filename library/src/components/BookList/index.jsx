@@ -3,6 +3,8 @@ import styled from 'styled-components';
 
 import BookCover from '../BookCover';
 
+import { Link } from "react-router-dom";
+
 const Container = styled.div`
     position: relative;
     display: flex;
@@ -47,14 +49,24 @@ const Author = styled.div`
     color: rgba(49, 49, 49, 0.8);
 `;
 
+const StyledLink = styled(Link)`
+    text-decoration: none;
+
+    &:focus, &:hover, &:visited, &:link, &:active {
+        text-decoration: none;
+    }
+`;
+
 const BookItem = ({ book }) => {
     return (
         <BookContainer>
-            <Thumbnail>
-                <BookCover src={book.cover} />
-            </Thumbnail>
-            <Title>{book.title}</Title>
-            <Author>by {book.authors}</Author>
+            <StyledLink to={`/details/${book.id}`}>
+                <Thumbnail>
+                    <BookCover src={book.cover} />
+                </Thumbnail>
+                <Title>{book.title}</Title>
+                <Author>by {book.authors}</Author>
+            </StyledLink>
         </BookContainer>
     );
 }
