@@ -1,11 +1,13 @@
 import { Component } from 'react';
 import styled from 'styled-components';
 
+import Wallpaper from '../../components/Wallpaper'; 
 
 const InformationPanel = styled.div`
     margin: 0 20px;
     display: inline-block;
     position: relative;
+    margin-top: 67px;
 `
 
 const Title = styled.div`
@@ -54,7 +56,7 @@ export default class Details extends Component {
     render() {
         return (
             <div>
-                {/* <Wallpaper url={imageURL} /> */}
+                <Wallpaper bookCoverImageSrc={imageURL} />
                 <InformationPanel>
                     <Title> Hooked: How to Build Habid-Forming Products </Title>
                     <Author>Nir Eyal</Author>
