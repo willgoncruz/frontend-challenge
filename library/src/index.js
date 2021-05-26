@@ -10,14 +10,10 @@ import {
 } from "react-router-dom";
 import Details from './pages/Details';
 
-import { createContext } from "react"
 import SearchStore from './stores/search';
 import DetailsStore from './stores/details';
 
-const SearchContext = createContext('SearchStore');
-const DetailsContext = createContext('DetailsStore');
-Search.contextType = SearchContext;
-Details.contextType = DetailsContext;
+import { SearchContext, DetailsContext } from './context';
 
 ReactDOM.render(
   <React.StrictMode>

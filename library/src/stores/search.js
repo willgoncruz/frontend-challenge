@@ -21,7 +21,7 @@ export default class SearchStore {
     }
 
     searchSuccess = ({ data }) => {
-        const volumes = data.items;
+        const volumes = data.items || [];
         this.books = volumes.map(book => ({
             id: book.id,
             title: book.volumeInfo.title,

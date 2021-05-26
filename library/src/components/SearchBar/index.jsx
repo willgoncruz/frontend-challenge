@@ -34,7 +34,7 @@ export default class SearchBar extends PureComponent {
     render() {
         return (
             <Container>
-                <Input type='text' onChange={this.doSearch}/>
+                <Input type='text' placeholder='Search book' onChange={this.doSearch}/>
             </Container>
         );
     }

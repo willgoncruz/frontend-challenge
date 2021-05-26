@@ -1,8 +1,12 @@
-import { Component } from 'react';
+import { useEffect, useContext } from 'react';
 import styled from 'styled-components';
-import { Observer } from 'mobx-react-lite';
+import { observer } from 'mobx-react-lite';
 
 import Wallpaper from '../../components/Wallpaper';
+import BackButton from '../../components/BackButton';
+
+import { useHistory } from "react-router-dom";
+import { DetailsContext } from '../../context';
 
 const InformationPanel = styled.div`
     margin: 0 20px;
@@ -52,10 +56,17 @@ const Description = styled.div`
 
     color: rgba(49, 49, 49, 0.6);
 `
+export default observer((props) => {
+    const { id } = props.match.params;
+    const store = useContext(DetailsContext);
+    const history = useHistory();
 
-const DetailsRenderer = ({ book }) => {
+    useEffect(() => store.getBookByID(id));
+
+    const { book } = store;
     return (
         <div>
+            <BackButton onClick={history.goBack} />
             <Wallpaper bookCoverImageSrc={book.cover} />
             <InformationPanel>
                 <Title>{book.title}</Title>
@@ -64,19 +75,4 @@ const DetailsRenderer = ({ book }) => {
             </InformationPanel>
         </div>
     );
-};
-
-export default class Details extends Component {
-    componentDidMount() {
-        const { id } = this.props.match.params;
-        this.context.getBookByID(id);
-    }
-
-    render() {
-        return (
-            <Observer>
-                {() => <DetailsRenderer book={this.context.book} /> }
-            </Observer>
-        );
-    }
-}
+});
