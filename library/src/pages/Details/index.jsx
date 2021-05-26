@@ -44,10 +44,11 @@ const Author = styled.div`
 
 const Description = styled.div`
     width: 100%;
-    height: fit-content;
+    height: 275px;
+    overflow: hidden;
+
     margin-top: 10px;
     margin-bottom: 10px;
-
 
     font-family: SF Pro Text;
     font-size: 14px;
@@ -55,7 +56,28 @@ const Description = styled.div`
     letter-spacing: 0.2px;
 
     color: rgba(49, 49, 49, 0.6);
-`
+`;
+
+const ActionPanel = styled.div`
+    bottom: 53px;
+    position: fixed;
+
+    display: flex;
+    flex-wrap: wrap;
+    width: 335px;
+    height: 56px;
+    margin: 0 20px;
+
+    background: #FFFFFF;
+    box-shadow: 3px 3px 23px rgba(107, 103, 70, 0.125901);
+    border-radius: 2px;
+`;
+
+const Action = styled.img`
+    margin: 20px 22px;
+    height: 16px;
+`;
+
 export default observer((props) => {
     const { id } = props.match.params;
     const store = useContext(DetailsContext);
@@ -73,6 +95,11 @@ export default observer((props) => {
                 <Author>{book.authors}</Author>
                 <Description dangerouslySetInnerHTML={{__html: book.description }} />
             </InformationPanel>
+            <ActionPanel>
+                <Action src={`${process.env.PUBLIC_URL}/Read.png`} />
+                <Action src={`${process.env.PUBLIC_URL}/Listen.png`} />
+                <Action src={`${process.env.PUBLIC_URL}/Share.png`} />
+            </ActionPanel>
         </div>
     );
 });
