@@ -3,8 +3,10 @@ import { searchVolumes } from '../api/googleapi';
 import debounce from 'lodash/debounce';
 
 export default class SearchStore {
+    tem = '';
+    page = 1;
     books = [];
-    failed = false;
+    loading = false;
 
     constructor() {
         makeAutoObservable(this);
@@ -12,12 +14,23 @@ export default class SearchStore {
     }
 
     debouncedSearch(term) {
-        this.failed = false;
+        this.page = 1;
+        this.term = term;
         if (!term) {
             return
         }
 
-        searchVolumes(term).then(this.searchSuccess, this.searchFail);
+        this.searchVolumes();
+    }
+
+    loadMore() {
+        this.page += 1;
+        this.searchVolumes();
+    }
+
+    searchVolumes() {
+        this.loading = true;
+        searchVolumes(this.term, this.page).then(this.searchSuccess, this.searchFail);
     }
 
     searchSuccess = ({ data }) => {
@@ -29,9 +42,10 @@ export default class SearchStore {
             authors: (book.volumeInfo.authors || []).join(', '),
             cover: (book.volumeInfo.imageLinks || {}).thumbnail || '',
         }));
+        this.loading = false;
     }
 
     searchFail = (error) => {
-        this.failed = true;
+        this.loading = false;
     }
 }

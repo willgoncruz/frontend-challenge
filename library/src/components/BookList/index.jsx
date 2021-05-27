@@ -9,7 +9,7 @@ const Container = styled.div`
     position: relative;
     display: flex;
     flex-wrap: wrap;
-    width: 100%;
+    width: fit-content;
 
     margin: 0 20px;
     margin-top: 40px;
@@ -20,6 +20,10 @@ const BookContainer = styled.div`
     max-width: 105px;
     margin-bottom: 12px;
     margin-right: 9px;
+
+    &:nth-child(3n+3) {
+        margin-right: 0px;
+    }
 `;
 
 const Thumbnail = styled.div`

@@ -1,5 +1,6 @@
 const axios = require('axios');
 
+const PER_PAGE = 18;
 const apiKey = '';
 const baseURL = 'https://www.googleapis.com/books/v1';
 
@@ -11,8 +12,9 @@ const requestGoogleApi = (url) => {
     return instance.get(`${url}&key=${apiKey}`);
 }
 
-export const searchVolumes = (searchTerm) => {
-    return requestGoogleApi(`/volumes?q=${searchTerm}`);
+export const searchVolumes = (searchTerm, page) => {
+    const maxResults = page * PER_PAGE;
+    return requestGoogleApi(`/volumes?q=${searchTerm}&maxResults=${maxResults}`);
 }
 
 export const getVolumeByID = (id) => {
