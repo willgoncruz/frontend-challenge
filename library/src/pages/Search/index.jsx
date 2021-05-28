@@ -1,11 +1,13 @@
-import { useContext, useEffect, useRef } from 'react';
+import React, { useContext, useEffect, useRef } from 'react';
 import { observer } from 'mobx-react-lite';
 import styled from 'styled-components';
 
+import Home from '../Home';
+import Footer from '../../components/Footer';
+import Loading from '../../components/Loading';
 import BookList from '../../components/BookList';
 import SearchBar from '../../components/SearchBar';
 import { SearchContext } from '../../context';
-import Loading from '../../components/Loading';
 
 const LoadingContainer = styled.div`
     display: flex;
@@ -34,10 +36,15 @@ export default observer(() => {
     return (
         <div>
             <SearchBar store={store} />
-            <BookList books={store.books} />
-            <LoadingContainer ref={loader}>
-                <Loading isVisible={store.loading} />
-            </LoadingContainer>
+            <Home />
+
+            <React.Fragment>
+                <BookList books={store.books} />
+                <LoadingContainer ref={loader}>
+                    <Loading isVisible={store.loading} />
+                </LoadingContainer>
+                <Footer />
+            </React.Fragment>
         </div>
     );
 });

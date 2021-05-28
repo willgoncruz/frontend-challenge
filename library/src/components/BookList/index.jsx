@@ -13,6 +13,7 @@ const Container = styled.div`
 
     margin: 0 20px;
     margin-top: 40px;
+    margin-bottom: 59px;
 `;
 
 const BookContainer = styled.div`

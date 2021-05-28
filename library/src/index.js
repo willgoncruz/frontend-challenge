@@ -12,19 +12,22 @@ import Details from './pages/Details';
 
 import SearchStore from './stores/search';
 import DetailsStore from './stores/details';
+import DiscoverStore from './stores/discover';
 
-import { SearchContext, DetailsContext } from './context';
+import { SearchContext, DetailsContext, DiscoverContext } from './context';
 
 ReactDOM.render(
   <React.StrictMode>
     <SearchContext.Provider value={new SearchStore()}>
     <DetailsContext.Provider value={new DetailsStore()}>
-    <Router>
-      <Switch>
-        <Route path='/details/:id' component={Details} />
-        <Route path='/' component={Search} />
-      </Switch>
-    </Router>
+    <DiscoverContext.Provider value={new DiscoverStore()}>
+      <Router>
+        <Switch>
+          <Route path='/details/:id' component={Details} />
+          <Route path='/' component={Search} />
+        </Switch>
+      </Router>
+  </DiscoverContext.Provider>
   </DetailsContext.Provider>
   </SearchContext.Provider>
   </React.StrictMode>,
