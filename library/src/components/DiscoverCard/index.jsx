@@ -2,6 +2,8 @@ import styled from 'styled-components';
 
 import BookCover from '../BookCover';
 
+import { Link } from "react-router-dom";
+
 const Card = styled.div`
     position: relative;
     display: inline-grid;
@@ -71,19 +73,27 @@ const Image = styled.div`
     left: 180px;
 `;
 
+const StyledLink = styled(Link)`
+    text-decoration: none;
+
+    &:focus, &:hover, &:visited, &:link, &:active {
+        text-decoration: none;
+    }
+`;
+
 export default function DiscoverCard({ book }) {
     return (
         <Card>
-            <InformationPanel>
-                <Title>{book.title}</Title>
-                <Author>{book.authors.split(',')[0]}</Author>
-                <ReadNow>
-                    <ReadNowCount>100+</ReadNowCount> Read Now
-                </ReadNow>
-            </InformationPanel>
-            <Image>
-                <BookCover src={book.cover}/>
-            </Image>
+            <StyledLink to={`/details/${book.id}`}>
+                <InformationPanel>
+                    <Title>{book.title}</Title>
+                    <Author>{book.authors.split(',')[0]}</Author>
+                    <ReadNow>
+                        <ReadNowCount>100+</ReadNowCount> Read Now
+                    </ReadNow>
+                </InformationPanel>
+                <Image><BookCover src={book.cover}/></Image>
+            </StyledLink>
         </Card>
     );
 };

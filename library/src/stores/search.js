@@ -3,9 +3,10 @@ import { searchVolumes } from '../api/googleapi';
 import debounce from 'lodash/debounce';
 
 export default class SearchStore {
-    tem = '';
     page = 1;
+    term = '';
     books = [];
+    home = true;
     loading = false;
 
     constructor() {

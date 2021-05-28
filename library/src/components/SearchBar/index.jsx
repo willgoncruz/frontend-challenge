@@ -31,10 +31,28 @@ export default class SearchBar extends PureComponent {
         this.props.store.search(e.target.value)
     }
 
+    onBlur = () => {
+        const { store } = this.props;
+        if (!store.term) {
+            store.home = true;
+        }
+    }
+
+    onFocus = () => {
+        this.props.store.home = false;
+    }
+
     render() {
         return (
             <Container>
-                <Input type='text' placeholder='Search book' onChange={this.doSearch}/>
+                <Input
+                    type='text'
+                    placeholder='Search book'
+                    defaultValue={this.props.store.term}
+                    onChange={this.doSearch}
+                    onBlur={this.onBlur}
+                    onFocus={this.onFocus}
+                />
             </Container>
         );
     }

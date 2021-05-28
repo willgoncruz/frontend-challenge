@@ -11,6 +11,7 @@ export default class DetailsStore {
     }
 
     getBookByID(id) {
+        // this.book = {};
         getVolumeByID(id).then(this.success, this.fail).then(() => this.loading = false)
     }
 

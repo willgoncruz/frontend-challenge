@@ -11,6 +11,11 @@ export default class DiscoverStore {
         makeAutoObservable(this);
     }
 
+    reset() {
+        this.books = [];
+        this.reading = {};
+    }
+
     getBookByID(id) {
         getVolumeByID(id).then(this.success, this.fail).then(() => this.loading = false)
     }

@@ -36,15 +36,18 @@ export default observer(() => {
     return (
         <div>
             <SearchBar store={store} />
-            <Home />
 
-            <React.Fragment>
-                <BookList books={store.books} />
-                <LoadingContainer ref={loader}>
-                    <Loading isVisible={store.loading} />
-                </LoadingContainer>
-                <Footer />
-            </React.Fragment>
+            { store.home && <Home /> }
+
+            { !store.home &&
+                <React.Fragment>
+                    <BookList books={store.books} />
+                    <LoadingContainer ref={loader}>
+                        <Loading isVisible={store.loading} />
+                    </LoadingContainer>
+                    <Footer />
+                </React.Fragment>
+            }
         </div>
     );
 });
