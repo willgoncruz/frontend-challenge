@@ -64,7 +64,7 @@ export default observer(() => {
         store.getBookByID('R42aBAAAQBAJ');
         store.getBookByID('R42aBAAAQBAJ');
         store.readingBookByID('R42aBAAAQBAJ');
-    }, []);
+    });
 
     return (
         <Container>

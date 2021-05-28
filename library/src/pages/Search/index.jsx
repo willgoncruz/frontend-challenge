@@ -31,7 +31,7 @@ export default observer(() => {
         if (loader.current) {
            observer.observe(loader.current)
         }
-    }, []);
+    });
 
     return (
         <div>
